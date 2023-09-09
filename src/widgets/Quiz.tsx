@@ -6,6 +6,8 @@ import { ButtonStyle } from "~/types/components";
 import { type Word } from "~/types/global";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
+import BackIcon from "/public/icons/chevron-left.svg";
+import Heading from "~/components/Heading";
 
 type Props = {
   today: Word[];
@@ -30,23 +32,12 @@ export default function Quiz({ today }: Props) {
     setCount((prev) => {
       return prev! + 1;
     });
-  };
-
-  const handleGoBack = () => {
-    setCount(null);
-    setAnswers([]);
+    setTimeout(() => responseRef.current?.focus(), 50);
   };
 
   return (
     <>
-      <Button
-        onClick={handleGoBack}
-        buttonStyle={ButtonStyle.LINK}
-        className="mb-6"
-      >
-        Go Back
-      </Button>
-      <p className="mb-3">{today?.[count!]?.jap}</p>
+      <Heading priority={1}>{today?.[count!]?.jap}</Heading>
       <form onSubmit={handleCheck} className="flex gap-x-3">
         <Input
           key={count}

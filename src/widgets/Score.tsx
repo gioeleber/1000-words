@@ -28,7 +28,7 @@ export default function Score({ today }: Props) {
 
   return (
     <>
-      <Heading priority={2}>Score</Heading>
+      <Heading priority={1}>Score</Heading>
       <ul className="mb-3">
         {today?.map((word, i) => (
           <li key={word.jap} className="flex">

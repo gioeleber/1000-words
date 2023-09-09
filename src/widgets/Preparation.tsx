@@ -18,11 +18,11 @@ export default function Preparation({ today }: Props) {
 
   return (
     <>
-      <Heading priority={2}>Words for the day</Heading>
+      <Heading priority={1}>Words for the day</Heading>
       <ul className="mb-3">
         {today.map((word) => (
           <li key={word.jap}>
-            {word.jap}: {word.eng.join(", ")}
+            <b>{word.jap}:</b> {word.eng.join(", ")}
           </li>
         ))}
       </ul>
