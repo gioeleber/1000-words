@@ -1,4 +1,3 @@
-import React from "react";
 import Heading from "~/components/Heading";
 import NextLink from "~/components/NextLink";
 import { ButtonStyle } from "~/types/components";
