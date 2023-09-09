@@ -1,31 +1,26 @@
-import { useRef, useEffect, type FormEvent } from "react";
-import Button from "~/components/Button";
-import Heading from "~/components/Heading";
-import Input from "~/components/Input";
+import { useEffect } from "react";
+
 import day1 from "~/mock/day1.json";
 import day2 from "~/mock/day2.json";
 import { expiresDate, getCookie, setCookie } from "~/utils/cookieUtils";
-import { ButtonStyle } from "~/types/components";
 import Preparation from "./Preparation";
-import SuccessIcon from "/public/icons/check-circle.svg";
-import ErrorIcon from "/public/icons/x-circle.svg";
-import { answersAtom, countAtom, dayAtom } from "~/atoms/gameAtoms";
-import { useAtom } from "jotai";
+
+import { countAtom, dayAtom } from "~/atoms/gameAtoms";
+import { useAtom, useAtomValue } from "jotai";
+import Quiz from "./Quiz";
+import Score from "./Score";
 
 const DAYS = [day1, day2];
 
 export default function Home() {
-  const responseRef = useRef<HTMLInputElement>(null);
-
-  const [count, setCount] = useAtom(countAtom);
-  const [answers, setAnswers] = useAtom(answersAtom);
+  const count = useAtomValue(countAtom);
   const [day, setDay] = useAtom(dayAtom);
+
   const today = DAYS[day];
 
   useEffect(() => {
     const startDate = getCookie("start_date");
     const now = Date.now();
-    console.log(now);
     if (!startDate) {
       setCookie({
         key: "stat_date",
@@ -38,30 +33,6 @@ export default function Home() {
     setDay(passedDays);
   }, []);
 
-  const handleCheck = (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setAnswers((prev) => {
-      const answer =
-        today?.[count!]?.eng.some(
-          (word) => word === responseRef.current?.value,
-        ) ?? false;
-
-      return prev.concat(answer);
-    });
-    setCount((prev) => {
-      return prev! + 1;
-    });
-  };
-
-  const handelRetry = () => {
-    setCount(null);
-    setAnswers([]);
-  };
-
-  const handleGoBack = () => {
-    setCount(null);
-    setAnswers([]);
-  };
   if (!today) {
     return <p>loading...</p>;
   }
@@ -70,54 +41,7 @@ export default function Home() {
     return <Preparation today={today} />;
   }
   if (count < (today?.length ?? 0)) {
-    return (
-      <>
-        <Button
-          onClick={handleGoBack}
-          buttonStyle={ButtonStyle.LINK}
-          className="mb-6"
-        >
-          Go Back
-        </Button>
-        <p className="mb-3">{today?.[count]?.jap}</p>
-        <form onSubmit={handleCheck} className="flex gap-x-3">
-          <Input
-            key={count}
-            ref={responseRef}
-            type="text"
-            label="Answer"
-            hideLabel
-            placeholder="Your answer"
-          />
-          <Button>Confirm response</Button>
-        </form>
-      </>
-    );
+    return <Quiz today={today} />;
   }
-  return (
-    <>
-      <Heading priority={2}>Score</Heading>
-      <ul className="mb-3">
-        {today?.map((word, i) => (
-          <li key={word.jap} className="flex">
-            <b>{word.jap}:</b> {word.eng.join(", ")}
-            {answers[i] ? (
-              <SuccessIcon width="24" className="stroke-green-600" />
-            ) : (
-              <ErrorIcon width="24" className="stroke-red-600" />
-            )}
-          </li>
-        ))}
-      </ul>
-      {answers.reduce(
-        (accumulator, currentValue) =>
-          currentValue ? accumulator + 1 : accumulator,
-        0,
-      ) < 9 ? (
-        <Button onClick={handelRetry}>Retry</Button>
-      ) : (
-        <p>You did good, you are set for today</p>
-      )}
-    </>
-  );
+  return <Score today={today} />;
 }

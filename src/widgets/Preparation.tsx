@@ -1,4 +1,5 @@
 import { useSetAtom } from "jotai";
+
 import { countAtom } from "~/atoms/gameAtoms";
 import Button from "~/components/Button";
 import Heading from "~/components/Heading";
