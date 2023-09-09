@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 
-import day1 from "~/mock/day1.json";
-import day2 from "~/mock/day2.json";
+import DAYS from "~/data/days.json";
 import { expiresDate, getCookie, setCookie } from "~/utils/cookieUtils";
 import Preparation from "./Preparation";
 
@@ -10,13 +9,11 @@ import { useAtom, useAtomValue } from "jotai";
 import Quiz from "./Quiz";
 import Score from "./Score";
 
-const DAYS = [day1, day2];
-
 export default function Home() {
   const count = useAtomValue(countAtom);
   const [day, setDay] = useAtom(dayAtom);
 
-  const today = DAYS[day];
+  const today = DAYS.find(({ day: appDay }) => appDay === day + 1);
 
   useEffect(() => {
     const startDate = getCookie("start_date");
@@ -38,10 +35,10 @@ export default function Home() {
   }
 
   if (count === null) {
-    return <Preparation today={today} />;
+    return <Preparation today={today.words} />;
   }
-  if (count < (today?.length ?? 0)) {
-    return <Quiz today={today} />;
+  if (count < (today?.words.length ?? 0)) {
+    return <Quiz today={today.words} />;
   }
-  return <Score today={today} />;
+  return <Score today={today.words} />;
 }
