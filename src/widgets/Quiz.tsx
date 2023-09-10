@@ -21,7 +21,6 @@ export default function Quiz({ words }: Props) {
   const [count, setCount] = useAtom(countAtom);
   const setAnswers = useSetAtom(answersAtom);
   const day = useAtomValue(dayAtom);
-  //console.log(count);
 
   const handleCheck = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,7 +44,6 @@ export default function Quiz({ words }: Props) {
       return aswers.sort((a, b) => a.key - b.key);
     });
 
-    //console.log(newQuestion - (day - 1) * words.length);
     setCount(newQuestion - (day - 1) * words.length);
     setTimeout(() => responseRef.current?.focus(), 50);
   };

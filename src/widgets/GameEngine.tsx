@@ -36,7 +36,6 @@ export default function Home() {
   if (count === null && session === 1) {
     return <Preparation words={today.words} />;
   }
-  console.log(count ?? 0 < (today?.words.length ?? 0));
   if ((count ?? 0) < (today?.words.length ?? 0)) {
     return <Quiz words={today.words} />;
   }

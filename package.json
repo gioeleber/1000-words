@@ -24,6 +24,7 @@
     "next": "^13.4.13",
     "next-auth": "^4.22.4",
     "react": "18.2.0",
+    "react-countdown": "^2.3.5",
     "react-dom": "18.2.0",
     "superjson": "^1.13.1",
     "tailwind-merge": "^1.14.0",
