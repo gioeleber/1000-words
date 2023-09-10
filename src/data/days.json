@@ -3,31 +3,104 @@
   {
     "day": 1,
     "words": [
-      {"jap": "行く (iku)","eng" : ["go"]},
-      {"jap": "見る (miru)","eng" : ["see", "look at"]},
-      {"jap": "多い (ooi)","eng" : ["a lot of", "many"]},
-      {"jap": "家 (ie)","eng" : ["home", "household"]},
-      {"jap": "これ (kore)","eng" :[ "this", "this one"]},
-      {"jap": "それ (sore)","eng" : ["that", "that one"]},
-      {"jap": "私 (watashi)","eng" : ["I"]},
-      {"jap": "仕事 (shigoto)","eng" : ["work", "job"]},
-      {"jap": "いつ (itsu)","eng" : ["when"]},
-      {"jap":" する (suru)","eng" : ["do", "make"]}
+      {"key": 0, "jap": "行く (iku)","eng" : ["go"]},
+      {"key": 1, "jap": "見る (miru)","eng" : ["see", "look at"]},
+      {"key": 2, "jap": "多い (ooi)","eng" : ["a lot of", "many"]},
+      {"key": 3, "jap": "家 (ie)","eng" : ["home", "household"]},
+      {"key": 4, "jap": "これ (kore)","eng" :[ "this", "this one"]},
+      {"key": 5, "jap": "それ (sore)","eng" : ["that", "that one"]},
+      {"key": 6, "jap": "私 (watashi)","eng" : ["I"]},
+      {"key": 7, "jap": "仕事 (shigoto)","eng" : ["work", "job"]},
+      {"key": 8, "jap": "いつ (itsu)","eng" : ["when"]},
+      {"key": 9, "jap":" する (suru)","eng" : ["do", "make"]}
     ]
   },
   {
     "day": 2,
     "words": [
-      {"jap": "出る (deru)","eng" : ["go out", "leave"]},
-      {"jap": "使う (tsukau)","eng" : ["use", "make use of"]},
-      {"jap": "所 (tokoro)","eng" : ["place"]},
-      {"jap": "作る (tsukuru)","eng" : ["make", "create"]},
-      {"jap": "思う (omou)","eng" : ["think"]},
-      {"jap": "持つ (motsu)","eng" : ["have", "possess"]},
-      {"jap": "買う (kau)","eng" : ["buy"]},
-      {"jap": "時間 (jikan)","eng" : ["time", "hour"]},
-      {"jap": "知る (shiru)","eng" : ["know"]},
-      {"jap": "同じ (onaji)","eng" : ["same", "identical"]}
+      {"key": 10, "jap": "出る (deru)","eng" : ["go out", "leave"]},
+      {"key": 11, "jap": "使う (tsukau)","eng" : ["use", "make use of"]},
+      {"key": 12, "jap": "所 (tokoro)","eng" : ["place"]},
+      {"key": 13, "jap": "作る (tsukuru)","eng" : ["make", "create"]},
+      {"key": 14, "jap": "思う (omou)","eng" : ["think"]},
+      {"key": 15, "jap": "持つ (motsu)","eng" : ["have", "possess"]},
+      {"key": 16, "jap": "買う (kau)","eng" : ["buy"]},
+      {"key": 17, "jap": "時間 (jikan)","eng" : ["time", "hour"]},
+      {"key": 18, "jap": "知る (shiru)","eng" : ["know"]},
+      {"key": 19, "jap": "同じ (onaji)","eng" : ["same", "identical"]}
+    ]
+  },
+  {
+    "day": 3,
+    "words": [
+      {"key": 20, "jap": "今 (ima)", "eng" : ["now"]},
+      {"key": 21, "jap": "新しい (atarashii)", "eng" : ["new"]},
+      {"key": 22, "jap": "なる (naru)", "eng" : ["become"]},
+      {"key": 23, "jap": "まだ (mada)", "eng" : ["not yet","yet", "still"]},
+      {"key": 24, "jap": "あと (ato)", "eng" : ["after"]},
+      {"key": 25, "jap": "聞く (kiku)", "eng" : ["hear", "ask"]},
+      {"key": 26, "jap": "言う (iu)", "eng" : ["say", "tell"]},
+      {"key": 27, "jap": "少ない (sukunai)", "eng" : ["few", "little"]},
+      {"key": 28, "jap": "高い (takai)", "eng" : ["high", "tall"]},
+      {"key": 29, "jap": "子供 (kodomo)", "eng" : ["child"]}
+    ]
+  },
+  {
+    "day": 4,
+    "words": [
+      {"key": 30, "jap": "そう (sou)", "eng" : ["so", "that", "way"]},
+      {"key": 31, "jap": "もう (mou)", "eng" : ["already", "yet"]},
+      {"key": 32, "jap": "学生 (gakusei)", "eng" : ["student"]},
+      {"key": 33, "jap": "熱い (atsui)", "eng" : ["hot", "hot to touch"]},
+      {"key": 34, "jap": "どうぞ (douzo)", "eng" : ["please"]},
+      {"key": 35, "jap": "午後 (gogo)", "eng" : ["afternoon", "p.m."]},
+      {"key": 36, "jap": "長い (nagai)", "eng" : ["long"]},
+      {"key": 37, "jap": "本 (hon)", "eng" : ["book", "volume"]},
+      {"key": 38, "jap": "今年 (kotoshi)", "eng" : ["this", "year"]},
+      {"key": 39, "jap": "よく (yoku)", "eng" : ["often", "well"]}
+    ]
+  },
+  {
+    "day": 5,
+    "words": [
+      {"key": 40, "jap": "彼女 (kanojo)", "eng" : ["she", "one's girlfriend"]},
+      {"key": 41, "jap": "どう (dou)", "eng" : ["how", "what"]},
+      {"key": 42, "jap": "言葉 (kotoba)", "eng" : ["word", "language"]},
+      {"key": 43, "jap": "顔 (kao)", "eng" : ["face"]},
+      {"key": 44, "jap": "終わる (owaru)", "eng" : ["finish", "end"]},
+      {"key": 45, "jap": "一つ (hitotsu)", "eng" : ["one thing"]},
+      {"key": 46, "jap": "あげる (ageru)", "eng" : ["give", "offer"]},
+      {"key": 47, "jap": "こう (kou)", "eng" : ["like this", "such"]},
+      {"key": 48, "jap": "学校 (gakkou)", "eng" : ["school"]},
+      {"key": 49, "jap": "くれる (kureru)", "eng" : ["be given"]}
+    ]
+  },
+  {
+    "day": 6,
+    "words": [
+      {"key": 50,"jap": "始める (hajimeru)", "eng" : ["start", "start something"]},
+      {"key": 51,"jap": "起きる (okiru)", "eng" : ["get up", "get out of bed"]},
+      {"key": 52,"jap": "春 (haru)", "eng" : ["spring"]},
+      {"key": 53,"jap": "午前 (gozen)", "eng" : ["morning", "a.m."]},
+      {"key": 54,"jap": "別 (betsu)", "eng" : ["another", "different"]},
+      {"key": 55,"jap": "どこ (doko)", "eng" : ["where"]},
+      {"key": 56,"jap": "部屋 (heya)", "eng" : ["room"]},
+      {"key": 57,"jap": "若い (wakai)", "eng" : ["young"]},
+      {"key": 58,"jap": "車 (kuruma)", "eng" : ["car", "automobile"]},
+      {"key": 59,"jap": "置く (oku)", "eng" : ["put", "place"]}
+    ]
+  },
+  {
+    "day": 7,
+    "words": [
+      {"key": 2,"jap": "出る (deru)","eng" : ["go out", "leave"]}
+      
     ]
   }
 ]
+
+
+
+
+
+

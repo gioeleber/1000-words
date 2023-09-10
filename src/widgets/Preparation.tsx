@@ -6,21 +6,21 @@ import Heading from "~/components/Heading";
 import { type Word } from "~/types/global";
 
 type Props = {
-  today: Word[];
+  words: Word[];
 };
 
-export default function Preparation({ today }: Props) {
+export default function Preparation({ words }: Props) {
   const setCount = useSetAtom(countAtom);
 
   const handelStart = () => {
-    setCount(0);
+    setCount(Math.floor(Math.random() * words.length));
   };
 
   return (
     <>
       <Heading priority={1}>Words for the day</Heading>
       <ul className="mb-3">
-        {today.map((word) => (
+        {words.map((word) => (
           <li key={word.jap}>
             <b>{word.jap}:</b> {word.eng.join(", ")}
           </li>

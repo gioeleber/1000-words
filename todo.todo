@@ -1,6 +1,8 @@
 [x] Separare files application
-[ ] creare api che importa un giorno alla volta
+[x] salvare giorno su local storage
 [ ] migliorare il loop di gioco
-1 - mettere 2 sessioni con la seconda a 30 secondi di distanza
-2 - permettere di passare e resettare il tempo per la prossima sessione solo quando entrambe sono state completate
+[x] randomizzare le parole
+[ ] mettere 2 sessioni con la seconda a 30 secondi di distanza
+[ ] permettere di passare e resettare il tempo per la prossima sessione solo quando entrambe sono state completate
+[ ] salvare lo stato delle domande su local storage
 [ ] permettere di salvare il progresso su un account
