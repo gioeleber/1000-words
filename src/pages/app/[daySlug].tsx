@@ -1,7 +1,9 @@
 import Head from "next/head";
+import { useRouter } from "next/router";
 import GameEngine from "~/widgets/GameEngine";
 
-export default function app() {
+export default function App() {
+  const router = useRouter();
   return (
     <>
       <Head>
@@ -9,7 +11,7 @@ export default function app() {
         <meta name="description" content="Jap learning app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <GameEngine />
+      <GameEngine day={router.query.daySlug as string} />
     </>
   );
 }

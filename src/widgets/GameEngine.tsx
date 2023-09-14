@@ -8,31 +8,17 @@ import Preparation from "./Preparation";
 import Quiz from "./Quiz";
 import Score from "./Score";
 
-export default function Home() {
+type Props = {
+  day: string;
+};
+
+export default function GameEngine({ day }: Props) {
   const count = useAtomValue(countAtom);
   const session = useAtomValue(sessionAtom);
-  const [day, setDay] = useAtom(dayAtom);
-  const [startDate, setStartDate] = useLocalStorage<null | number>(
-    "start_date",
-    null,
-  );
 
-  useEffect(() => {
-    const now = Date.now();
-    if (startDate === null) {
-      setStartDate(now);
-      return;
-    }
-    const passedDays = Math.ceil((+now - +startDate) / 1000 / 60 / 60 / 24);
-    setDay(passedDays);
-  }, []);
+  const today = DAYS.find(({ day: appDay }) => appDay === +day);
 
-  const today = DAYS.find(({ day: appDay }) => appDay === day);
-
-  if (!today) {
-    return <p>loading...</p>;
-  }
-
+  if (!today) return <p>loading...</p>;
   if (count === null && session === 1) {
     return <Preparation words={today.words} />;
   }

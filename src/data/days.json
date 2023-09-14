@@ -42,7 +42,7 @@
       {"key": 26, "jap": "言う (iu)", "eng" : ["say", "tell"]},
       {"key": 27, "jap": "少ない (sukunai)", "eng" : ["few", "little"]},
       {"key": 28, "jap": "高い (takai)", "eng" : ["high", "tall"]},
-      {"key": 29, "jap": "子供 (kodomo)", "eng" : ["child"]}
+      {"key": 29, "jap": "子供 (kodomo)", "eng" : ["child", "kid"]}
     ]
   },
   {
