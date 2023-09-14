@@ -1,8 +1,6 @@
-import { useEffect } from "react";
-import { useAtom, useAtomValue } from "jotai";
-import { useLocalStorage } from "usehooks-ts";
+import { useAtomValue } from "jotai";
 
-import { countAtom, dayAtom, sessionAtom } from "~/atoms/gameAtoms";
+import { countAtom, sessionAtom } from "~/atoms/gameAtoms";
 import DAYS from "~/data/days.json";
 import Preparation from "./Preparation";
 import Quiz from "./Quiz";

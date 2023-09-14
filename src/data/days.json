@@ -48,7 +48,7 @@
   {
     "day": 4,
     "words": [
-      {"key": 30, "jap": "そう (sou)", "eng" : ["so", "that", "way"]},
+      {"key": 30, "jap": "そう (sou)", "eng" : ["so", "that way"]},
       {"key": 31, "jap": "もう (mou)", "eng" : ["already", "yet"]},
       {"key": 32, "jap": "学生 (gakusei)", "eng" : ["student"]},
       {"key": 33, "jap": "熱い (atsui)", "eng" : ["hot", "hot to touch"]},
@@ -56,7 +56,7 @@
       {"key": 35, "jap": "午後 (gogo)", "eng" : ["afternoon", "p.m."]},
       {"key": 36, "jap": "長い (nagai)", "eng" : ["long"]},
       {"key": 37, "jap": "本 (hon)", "eng" : ["book", "volume"]},
-      {"key": 38, "jap": "今年 (kotoshi)", "eng" : ["this", "year"]},
+      {"key": 38, "jap": "今年 (kotoshi)", "eng" : ["this year"]},
       {"key": 39, "jap": "よく (yoku)", "eng" : ["often", "well"]}
     ]
   },

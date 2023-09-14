@@ -1,4 +1,6 @@
+import { useEffect, useState } from "react";
 import { useAtom, useAtomValue, useSetAtom } from "jotai";
+import { useLocalStorage } from "usehooks-ts";
 import Countdown from "react-countdown";
 
 import { answersAtom, countAtom, sessionAtom } from "~/atoms/gameAtoms";
@@ -7,7 +9,9 @@ import Heading from "~/components/Heading";
 import Button from "~/components/Button";
 import SuccessIcon from "/public/icons/check-circle.svg";
 import ErrorIcon from "/public/icons/x-circle.svg";
-import { useState } from "react";
+import { LEVEL_KEY } from "~/utils/consts";
+import { formatDate } from "~/utils/dateUtils";
+import NextLink from "~/components/NextLink";
 
 type Props = {
   words: Word[];
@@ -15,6 +19,17 @@ type Props = {
 
 export default function Score({ words }: Props) {
   const answers = useAtomValue(answersAtom);
+  const session = useAtomValue(sessionAtom);
+  const [level, setLevel] = useLocalStorage<{
+    lastCompletion?: string | null;
+    day: number;
+  }>(LEVEL_KEY, { lastCompletion: undefined, day: 1 });
+
+  useEffect(() => {
+    if (session === 2) {
+      setLevel({ lastCompletion: formatDate(new Date()), day: level.day });
+    }
+  }, []);
 
   return (
     <>
@@ -84,5 +99,10 @@ const Footer = ({ words }: Props) => {
     );
   }
 
-  return <p>You did good, you are set for today</p>;
+  return (
+    <>
+      <p>You did good, you are set for today</p>
+      <NextLink href="/day-list">Back to day selection</NextLink>
+    </>
+  );
 };
