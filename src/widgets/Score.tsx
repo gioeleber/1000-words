@@ -1,15 +1,14 @@
-import { useEffect, useState } from "react";
-import { useAtom, useAtomValue, useSetAtom } from "jotai";
-import { useLocalStorage } from "usehooks-ts";
+import { useEffect } from "react";
+import { atom, useAtom, useAtomValue } from "jotai";
+import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 import Countdown from "react-countdown";
 
-import { answersAtom, countAtom, sessionAtom } from "~/atoms/gameAtoms";
-import { type Word } from "~/types/global";
+import { type Game, type Word } from "~/types/global";
 import Heading from "~/components/Heading";
 import Button from "~/components/Button";
 import SuccessIcon from "/public/icons/check-circle.svg";
 import ErrorIcon from "/public/icons/x-circle.svg";
-import { LEVEL_KEY } from "~/utils/consts";
+import { GAME_KEY, LEVEL_KEY, gameInitValue } from "~/utils/consts";
 import { formatDate } from "~/utils/dateUtils";
 import NextLink from "~/components/NextLink";
 
@@ -17,16 +16,18 @@ type Props = {
   words: Word[];
 };
 
+const isCountingAtom = atom<boolean>(false);
+
 export default function Score({ words }: Props) {
-  const answers = useAtomValue(answersAtom);
-  const session = useAtomValue(sessionAtom);
+  const isCounting = useAtomValue(isCountingAtom);
   const [level, setLevel] = useLocalStorage<{
     lastCompletion?: string | null;
     day: number;
   }>(LEVEL_KEY, { lastCompletion: undefined, day: 1 });
+  const game = useReadLocalStorage<Game>(GAME_KEY);
 
   useEffect(() => {
-    if (session === 2) {
+    if (game?.session === 2) {
       setLevel({ lastCompletion: formatDate(new Date()), day: level.day });
     }
   }, []);
@@ -34,43 +35,40 @@ export default function Score({ words }: Props) {
   return (
     <>
       <Heading priority={1}>Score</Heading>
-      <ul className="mb-3">
-        {words?.map((word, i) => (
-          <li key={word.jap} className="flex gap-x-1">
-            <b>{word.jap}:</b>
-            {word.eng.join(", ")}
-            {answers[i]?.answer ? (
-              <SuccessIcon width="24" className="stroke-green-600" />
-            ) : (
-              <ErrorIcon width="24" className="stroke-red-600" />
-            )}
-          </li>
-        ))}
-      </ul>
+      {!isCounting && (
+        <ul className="mb-3">
+          {words?.map((word, i) => (
+            <li key={word.jap} className="flex gap-x-1">
+              <b>{word.jap}:</b>
+              {word.eng.join(", ")}
+              {game?.answers[i]?.answer ? (
+                <SuccessIcon width="24" className="stroke-green-600" />
+              ) : (
+                <ErrorIcon width="24" className="stroke-red-600" />
+              )}
+            </li>
+          ))}
+        </ul>
+      )}
       <Footer words={words} />
     </>
   );
 }
 
 const Footer = ({ words }: Props) => {
-  const setCount = useSetAtom(countAtom);
-  const [session, setSession] = useAtom(sessionAtom);
-  const [answers, setAnswers] = useAtom(answersAtom);
-  const [isCounting, setIsCounting] = useState(false);
+  const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
+  const [isCounting, setIsCounting] = useAtom(isCountingAtom);
 
   const handelRetry = () => {
-    setCount(null);
-    setAnswers([]);
-    setSession(1);
+    setGame({ count: null, answers: [], session: 1 });
   };
   const handleNextSession = () => {
+    const count = Math.floor(Math.random() * words.length);
     setIsCounting(false);
-    setSession(2);
-    setCount(Math.floor(Math.random() * words.length));
-    setAnswers([]);
+    setGame({ count, answers: [], session: 2 });
   };
 
-  const score = answers.reduce(
+  const score = game.answers.reduce(
     (accumulator, currentValue) =>
       currentValue.answer ? accumulator + 1 : accumulator,
     0,
@@ -79,7 +77,6 @@ const Footer = ({ words }: Props) => {
   if (isCounting) {
     return (
       <Countdown
-        className="text-red-300"
         onComplete={handleNextSession}
         date={Date.now() + 30 * 1000}
         renderer={({ seconds }) => <b className="text-2xl">{seconds}</b>}
@@ -87,11 +84,11 @@ const Footer = ({ words }: Props) => {
     );
   }
 
-  if (score < answers.length - 1) {
+  if (score < game.answers.length - 1) {
     return <Button onClick={handelRetry}>Retry</Button>;
   }
 
-  if (session === 1) {
+  if (game.session === 1) {
     return (
       <Button onClick={() => setIsCounting(true)}>
         Wait for second session

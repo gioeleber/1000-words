@@ -27,7 +27,7 @@ export default function DayList() {
       setDay(level.day + 1);
       return;
     }
-    setDay(level.day);
+    setDay(2);
   }, []);
 
   return (

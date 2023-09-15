@@ -3,3 +3,9 @@ export interface Word {
   jap: string;
   eng: string[];
 }
+
+export interface Game {
+  session: number;
+  count: null | number;
+  answers: { key: number; answer: boolean }[];
+}
