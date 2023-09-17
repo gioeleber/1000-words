@@ -23,17 +23,18 @@ export default function Quiz({ words, day }: Props) {
 
   const handleCheck = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    const newQuestionKeys = questionKeys.filter((key) => {
-      return key !== game.count! + (day - 1) * words.length;
-    });
 
-    if (newQuestionKeys.length === 0) {
+    if (questionKeys.length === 0) {
       setGame({
         ...game,
         count: words.length + 1,
       });
       return;
     }
+
+    const newQuestionKeys = questionKeys.filter((key) => {
+      return key !== game.count! + (day - 1) * words.length;
+    });
 
     setQuestionKeys(newQuestionKeys);
     const newQuestion = randomElement(newQuestionKeys);
