@@ -12,7 +12,7 @@ export default function App() {
         <meta name="description" content="Jap learning app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <GameEngine day={router.query.daySlug as string} />
+      <GameEngine day={Number(router.query.daySlug as string)} />
     </>
   );
 }

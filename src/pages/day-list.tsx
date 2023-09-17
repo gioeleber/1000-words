@@ -1,8 +1,6 @@
-import { useAtom } from "jotai";
 import Head from "next/head";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
-import { dayAtom } from "~/atoms/gameAtoms";
 import Heading from "~/components/Heading";
 import NextLink from "~/components/NextLink";
 import DAYS from "~/data/days.json";
@@ -10,7 +8,7 @@ import { LEVEL_KEY } from "~/utils/consts";
 import { formatDate } from "~/utils/dateUtils";
 
 export default function DayList() {
-  const [day, setDay] = useAtom(dayAtom);
+  const [day, setDay] = useState<number>(1);
   const [level, setLevel] = useLocalStorage<{
     lastCompletion?: string | null;
     day: number;

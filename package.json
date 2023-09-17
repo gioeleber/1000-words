@@ -50,5 +50,9 @@
   },
   "ct3aMetadata": {
     "initVersion": "7.19.0"
+  },
+  "volta": {
+    "node": "18.17.1",
+    "pnpm": "8.7.5"
   }
 }

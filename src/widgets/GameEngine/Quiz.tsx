@@ -1,7 +1,5 @@
 import { type FormEvent, useRef, useState } from "react";
-import { useAtomValue } from "jotai";
 
-import { dayAtom } from "~/atoms/gameAtoms";
 import { type Game, type Word } from "~/types/global";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
@@ -12,22 +10,30 @@ import { useLocalStorage } from "usehooks-ts";
 
 type Props = {
   words: Word[];
+  day: number;
 };
 
-export default function Quiz({ words }: Props) {
+export default function Quiz({ words, day }: Props) {
   const responseRef = useRef<HTMLInputElement>(null);
 
   const [questionKeys, setQuestionKeys] = useState(
     words.map((word) => word.key),
   );
   const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
-  const day = useAtomValue(dayAtom);
 
   const handleCheck = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     const newQuestionKeys = questionKeys.filter((key) => {
       return key !== game.count! + (day - 1) * words.length;
     });
+
+    if (newQuestionKeys.length === 0) {
+      setGame({
+        ...game,
+        count: words.length + 1,
+      });
+      return;
+    }
 
     setQuestionKeys(newQuestionKeys);
     const newQuestion = randomElement(newQuestionKeys);

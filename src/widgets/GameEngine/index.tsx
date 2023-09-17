@@ -8,20 +8,20 @@ import { GAME_KEY, gameInitValue } from "~/utils/consts";
 import { type Game } from "~/types/global";
 
 type Props = {
-  day: string;
+  day: number;
 };
 
 export default function GameEngine({ day }: Props) {
   const [game] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
 
-  const today = DAYS.find(({ day: appDay }) => appDay === +day);
+  const today = DAYS.find(({ day: appDay }) => appDay === day);
 
   if (!today) return <p>loading...</p>;
   if (game.count === null && game.session === 1) {
     return <Preparation words={today.words} />;
   }
   if ((game.count ?? 0) < (today?.words.length ?? 0)) {
-    return <Quiz words={today.words} />;
+    return <Quiz words={today.words} day={day} />;
   }
   return <Score words={today.words} />;
 }
