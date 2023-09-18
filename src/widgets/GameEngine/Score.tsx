@@ -57,13 +57,16 @@ export default function Score({ words, day }: Props) {
           </ul>
         </>
       )}
-      <Footer />
+      <Footer day={day} />
     </>
   );
 }
 
-const Footer = () => {
-  const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
+const Footer = ({ day }: { day: number }) => {
+  const [game, setGame] = useLocalStorage<Game>(GAME_KEY, {
+    ...gameInitValue,
+    day,
+  });
   const [isCounting, setIsCounting] = useAtom(isCountingAtom);
 
   const handelRetry = () => {

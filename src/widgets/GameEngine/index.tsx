@@ -14,25 +14,29 @@ type Props = {
 };
 
 export default function GameEngine({ day }: Props) {
-  const [game] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
+  const [game] = useLocalStorage<Game>(GAME_KEY, {
+    ...gameInitValue,
+    day,
+  });
   const level = useReadLocalStorage<Level>(LEVEL_KEY);
 
   const today = DAYS.find(({ day: appDay }) => appDay === day);
 
-  if (day > (level?.day ?? 1))
+  if (day > (level?.day ?? 1)) {
     return (
       <>
         <Heading priority={1}>You are not at this level yet</Heading>
         <NextLink href="/day-list">Back to day list</NextLink>
       </>
     );
+  }
   if (!today) return <p>loading...</p>;
 
   switch (true) {
     case game.fase === GameFase.PREPARATION:
-      return <Preparation words={today.words} />;
+      return <Preparation words={today.words} day={day} />;
     case game.fase === GameFase.QUIZ:
-      return <Quiz words={today.words} />;
+      return <Quiz words={today.words} day={day} />;
     default:
       return <Score words={today.words} day={day} />;
   }

@@ -10,7 +10,10 @@ export enum GameFase {
   SCORE = "score",
 }
 
+export type Games = Record<string, Game>;
+
 export interface Game {
+  day?: number;
   session: number;
   fase: GameFase;
   words: Word[];

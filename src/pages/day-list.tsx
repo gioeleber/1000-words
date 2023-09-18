@@ -37,6 +37,9 @@ export default function DayList() {
         <meta name="description" content="Jap learning app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
+      {/* {level.lastCompletion && (
+        <p>You are set for today. Come back tomorrow to unlock a new level!</p>
+      )} */}
       <Heading priority={1}>You are at level {day}</Heading>
       <ul>
         {DAYS.map(({ day: dataDay }) =>

@@ -3,15 +3,18 @@ import { useLocalStorage } from "usehooks-ts";
 import Button from "~/components/Button";
 import Heading from "~/components/Heading";
 import { GameFase, type Game, type Word } from "~/types/global";
-import { shuffle } from "~/utils/arrayUtils";
 import { GAME_KEY, gameInitValue } from "~/utils/consts";
 
 type Props = {
   words: Word[];
+  day: number;
 };
 
-export default function Preparation({ words }: Props) {
-  const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
+export default function Preparation({ words, day }: Props) {
+  const [game, setGame] = useLocalStorage<Game>(GAME_KEY, {
+    ...gameInitValue,
+    day,
+  });
 
   const handelStart = () => {
     setGame({ ...game, fase: GameFase.QUIZ });

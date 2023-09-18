@@ -10,15 +10,23 @@ import { shuffle } from "~/utils/arrayUtils";
 
 type Props = {
   words: Word[];
+  day: number;
 };
 
-export default function Quiz({ words }: Props) {
+export default function Quiz({ words, day }: Props) {
   const responseRef = useRef<HTMLInputElement>(null);
 
-  const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
+  const [game, setGame] = useLocalStorage<Game>(GAME_KEY, {
+    ...gameInitValue,
+    day,
+  });
   const [quizWords, setQuizWords] = useState<Word[] | null>(null);
 
   useEffect(() => {
+    if (game.day !== day) {
+      setGame({ ...gameInitValue, day });
+      return;
+    }
     setQuizWords(game.words.length === 0 ? shuffle(words) : game.words);
   }, []);
 
