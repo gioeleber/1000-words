@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import { useRouter } from "next/router";
 import { atom, useAtom, useAtomValue } from "jotai";
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 import Countdown from "react-countdown";
@@ -10,7 +11,7 @@ import SuccessIcon from "/public/icons/check-circle.svg";
 import ErrorIcon from "/public/icons/x-circle.svg";
 import { GAME_KEY, LEVEL_KEY, gameInitValue } from "~/utils/consts";
 import { formatDate } from "~/utils/dateUtils";
-import NextLink from "~/components/NextLink";
+import { ButtonStyle } from "~/types/components";
 
 type Props = {
   words: Word[];
@@ -63,6 +64,7 @@ export default function Score({ words, day }: Props) {
 }
 
 const Footer = ({ day }: { day: number }) => {
+  const router = useRouter();
   const [game, setGame] = useLocalStorage<Game>(GAME_KEY, {
     ...gameInitValue,
     day,
@@ -70,16 +72,22 @@ const Footer = ({ day }: { day: number }) => {
   const [isCounting, setIsCounting] = useAtom(isCountingAtom);
 
   const handelRetry = () => {
-    setGame(gameInitValue);
+    setGame({ ...gameInitValue, day });
   };
   const handleNextSession = () => {
     setIsCounting(false);
     setGame({
+      day,
       words: [],
       answers: [],
       session: 2,
       fase: GameFase.QUIZ,
     });
+  };
+
+  const handleBack = () => {
+    setGame(gameInitValue);
+    void router.push("/day-list");
   };
 
   const score = game.answers.reduce(
@@ -113,7 +121,9 @@ const Footer = ({ day }: { day: number }) => {
   return (
     <>
       <p>You did good, you are set for today</p>
-      <NextLink href="/day-list">Back to day selection</NextLink>
+      <Button buttonStyle={ButtonStyle.LINK} onClick={handleBack}>
+        Back to day selection
+      </Button>
     </>
   );
 };

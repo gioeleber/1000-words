@@ -15,8 +15,11 @@ export default function DayList() {
     lastCompletion: undefined,
     day: 1,
   });
+  const [showCompleatedAdvice, toggleCompleatedAdvice] =
+    useState<boolean>(false);
 
   useEffect(() => {
+    toggleCompleatedAdvice(!!level.lastCompletion);
     const now = formatDate(new Date());
     if (level.lastCompletion === undefined) {
       setLevel({ lastCompletion: null, day: 1 });
@@ -37,9 +40,9 @@ export default function DayList() {
         <meta name="description" content="Jap learning app" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      {/* {level.lastCompletion && (
+      {showCompleatedAdvice && (
         <p>You are set for today. Come back tomorrow to unlock a new level!</p>
-      )} */}
+      )}
       <Heading priority={1}>You are at level {day}</Heading>
       <ul>
         {DAYS.map(({ day: dataDay }) =>
