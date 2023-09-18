@@ -1,9 +1,9 @@
-import { useSetAtom } from "jotai";
 import { useLocalStorage } from "usehooks-ts";
 
 import Button from "~/components/Button";
 import Heading from "~/components/Heading";
-import { type Game, type Word } from "~/types/global";
+import { GameFase, type Game, type Word } from "~/types/global";
+import { shuffle } from "~/utils/arrayUtils";
 import { GAME_KEY, gameInitValue } from "~/utils/consts";
 
 type Props = {
@@ -14,8 +14,7 @@ export default function Preparation({ words }: Props) {
   const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
 
   const handelStart = () => {
-    const fistRandomCount = Math.floor(Math.random() * words.length);
-    setGame({ ...game, count: fistRandomCount });
+    setGame({ ...game, fase: GameFase.QUIZ });
   };
 
   return (

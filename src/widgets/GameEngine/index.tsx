@@ -1,11 +1,13 @@
-import { useLocalStorage } from "usehooks-ts";
+import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 
 import DAYS from "~/data/days.json";
 import Preparation from "./Preparation";
 import Quiz from "./Quiz";
 import Score from "./Score";
-import { GAME_KEY, gameInitValue } from "~/utils/consts";
-import { type Game } from "~/types/global";
+import { GAME_KEY, LEVEL_KEY, gameInitValue } from "~/utils/consts";
+import { GameFase, type Game, type Level } from "~/types/global";
+import Heading from "~/components/Heading";
+import NextLink from "~/components/NextLink";
 
 type Props = {
   day: number;
@@ -13,15 +15,25 @@ type Props = {
 
 export default function GameEngine({ day }: Props) {
   const [game] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
+  const level = useReadLocalStorage<Level>(LEVEL_KEY);
 
   const today = DAYS.find(({ day: appDay }) => appDay === day);
 
+  if (day > (level?.day ?? 1))
+    return (
+      <>
+        <Heading priority={1}>You are not at this level yet</Heading>
+        <NextLink href="/day-list">Back to day list</NextLink>
+      </>
+    );
   if (!today) return <p>loading...</p>;
-  if (game.count === null && game.session === 1) {
-    return <Preparation words={today.words} />;
+
+  switch (true) {
+    case game.fase === GameFase.PREPARATION:
+      return <Preparation words={today.words} />;
+    case game.fase === GameFase.QUIZ:
+      return <Quiz words={today.words} />;
+    default:
+      return <Score words={today.words} day={day} />;
   }
-  if ((game.count ?? 0) < (today?.words.length ?? 0)) {
-    return <Quiz words={today.words} day={day} />;
-  }
-  return <Score words={today.words} />;
 }

@@ -1,18 +1,20 @@
 import Head from "next/head";
 import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
+
 import Heading from "~/components/Heading";
 import NextLink from "~/components/NextLink";
-import DAYS from "~/data/days.json";
 import { LEVEL_KEY } from "~/utils/consts";
 import { formatDate } from "~/utils/dateUtils";
+import DAYS from "~/data/days.json";
+import { type Level } from "~/types/global";
 
 export default function DayList() {
   const [day, setDay] = useState<number>(1);
-  const [level, setLevel] = useLocalStorage<{
-    lastCompletion?: string | null;
-    day: number;
-  }>(LEVEL_KEY, { lastCompletion: undefined, day: 1 });
+  const [level, setLevel] = useLocalStorage<Level>(LEVEL_KEY, {
+    lastCompletion: undefined,
+    day: 1,
+  });
 
   useEffect(() => {
     const now = formatDate(new Date());
@@ -25,7 +27,7 @@ export default function DayList() {
       setDay(level.day + 1);
       return;
     }
-    setDay(2);
+    setDay(level.day);
   }, []);
 
   return (

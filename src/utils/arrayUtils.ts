@@ -1,3 +1,3 @@
-export function randomElement<T>(array: T[]): T {
-  return array[Math.floor(Math.random() * array.length)] as T;
+export function shuffle<T>(array: T[]) {
+  return [...array].sort(() => Math.random() - 0.5);
 }

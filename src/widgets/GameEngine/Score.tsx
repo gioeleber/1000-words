@@ -3,7 +3,7 @@ import { atom, useAtom, useAtomValue } from "jotai";
 import { useLocalStorage, useReadLocalStorage } from "usehooks-ts";
 import Countdown from "react-countdown";
 
-import { type Game, type Word } from "~/types/global";
+import { GameFase, type Game, type Word } from "~/types/global";
 import Heading from "~/components/Heading";
 import Button from "~/components/Button";
 import SuccessIcon from "/public/icons/check-circle.svg";
@@ -14,11 +14,12 @@ import NextLink from "~/components/NextLink";
 
 type Props = {
   words: Word[];
+  day: number;
 };
 
 const isCountingAtom = atom<boolean>(false);
 
-export default function Score({ words }: Props) {
+export default function Score({ words, day }: Props) {
   const isCounting = useAtomValue(isCountingAtom);
   const [level, setLevel] = useLocalStorage<{
     lastCompletion?: string | null;
@@ -28,7 +29,11 @@ export default function Score({ words }: Props) {
 
   useEffect(() => {
     if (game?.session === 2) {
-      setLevel({ lastCompletion: formatDate(new Date()), day: level.day });
+      setLevel({
+        lastCompletion:
+          level.day === day ? formatDate(new Date()) : level.lastCompletion,
+        day: level.day,
+      });
     }
   }, []);
 
@@ -52,22 +57,26 @@ export default function Score({ words }: Props) {
           </ul>
         </>
       )}
-      <Footer words={words} />
+      <Footer />
     </>
   );
 }
 
-const Footer = ({ words }: Props) => {
+const Footer = () => {
   const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
   const [isCounting, setIsCounting] = useAtom(isCountingAtom);
 
   const handelRetry = () => {
-    setGame({ count: null, answers: [], session: 1 });
+    setGame(gameInitValue);
   };
   const handleNextSession = () => {
-    const count = Math.floor(Math.random() * words.length);
     setIsCounting(false);
-    setGame({ count, answers: [], session: 2 });
+    setGame({
+      words: [],
+      answers: [],
+      session: 2,
+      fase: GameFase.QUIZ,
+    });
   };
 
   const score = game.answers.reduce(

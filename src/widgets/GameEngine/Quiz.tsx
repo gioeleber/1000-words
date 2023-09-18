@@ -1,69 +1,66 @@
-import { type FormEvent, useRef, useState } from "react";
+import { type FormEvent, useRef, useState, useEffect } from "react";
 
-import { type Game, type Word } from "~/types/global";
+import { GameFase, type Game, type Word } from "~/types/global";
 import Button from "~/components/Button";
 import Input from "~/components/Input";
 import Heading from "~/components/Heading";
-import { randomElement } from "~/utils/arrayUtils";
 import { GAME_KEY, gameInitValue } from "~/utils/consts";
 import { useLocalStorage } from "usehooks-ts";
+import { shuffle } from "~/utils/arrayUtils";
 
 type Props = {
   words: Word[];
-  day: number;
 };
 
-export default function Quiz({ words, day }: Props) {
+export default function Quiz({ words }: Props) {
   const responseRef = useRef<HTMLInputElement>(null);
 
-  const [questionKeys, setQuestionKeys] = useState(
-    words.map((word) => word.key),
-  );
   const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
+  const [quizWords, setQuizWords] = useState<Word[] | null>(null);
+
+  useEffect(() => {
+    setQuizWords(game.words.length === 0 ? shuffle(words) : game.words);
+  }, []);
+
+  useEffect(() => {
+    if (quizWords) {
+      setGame({
+        ...game,
+        fase: quizWords.length === 0 ? GameFase.SCORE : GameFase.QUIZ,
+      });
+    }
+  }, [quizWords]);
 
   const handleCheck = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (questionKeys.length === 0) {
-      setGame({
-        ...game,
-        count: words.length + 1,
-      });
-      return;
-    }
-
-    const newQuestionKeys = questionKeys.filter((key) => {
-      return key !== game.count! + (day - 1) * words.length;
-    });
-
-    setQuestionKeys(newQuestionKeys);
-    const newQuestion = randomElement(newQuestionKeys);
-
     const answer =
-      words?.[game.count!]?.eng.some(
-        (word) => word === responseRef.current?.value,
-      ) ?? false;
+      quizWords?.[0]?.eng.some((word) => word === responseRef.current?.value) ??
+      false;
 
     const aswers = game.answers.concat({
-      key: words?.[game.count!]?.key ?? 0,
+      key: quizWords?.[0]?.key ?? 0,
       answer,
     });
 
+    const remainingWords = quizWords?.filter((_, i) => i !== 0) ?? [];
+
     setGame({
       ...game,
+      words: remainingWords,
       answers: aswers.sort((a, b) => a.key - b.key),
-      count: newQuestion - (day - 1) * words.length,
     });
+    setQuizWords(remainingWords);
 
     setTimeout(() => responseRef.current?.focus(), 50);
   };
 
   return (
     <>
-      <Heading priority={1}>{words?.[game.count!]?.jap}</Heading>
+      <Heading priority={1}>{quizWords?.[0]?.jap}</Heading>
       <form onSubmit={handleCheck} className="flex gap-x-3">
         <Input
-          key={game.count}
+          key={quizWords?.[0]?.key}
           ref={responseRef}
           type="text"
           label="Answer"
