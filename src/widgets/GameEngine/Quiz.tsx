@@ -23,10 +23,6 @@ export default function Quiz({ words, day }: Props) {
   const [quizWords, setQuizWords] = useState<Word[] | null>(null);
 
   useEffect(() => {
-    if (game.day !== day) {
-      setGame({ ...gameInitValue, day });
-      return;
-    }
     setQuizWords(game.words.length === 0 ? shuffle(words) : game.words);
   }, []);
 

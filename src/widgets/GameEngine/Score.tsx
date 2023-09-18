@@ -86,7 +86,7 @@ const Footer = ({ day }: { day: number }) => {
   };
 
   const handleBack = () => {
-    setGame(gameInitValue);
+    setGame({ ...gameInitValue, day });
     void router.push("/day-list");
   };
 

@@ -20,6 +20,11 @@ export default function Preparation({ words, day }: Props) {
     setGame({ ...game, fase: GameFase.QUIZ });
   };
 
+  if (game.day !== day) {
+    setGame({ ...gameInitValue, day });
+    return;
+  }
+
   return (
     <>
       <Heading priority={1}>Words for the day</Heading>
