@@ -1,3 +1,10 @@
+export enum ReqStatus {
+  IDLE = "idle",
+  LOADING = "loading",
+  SUCCESS = "success",
+  ERROR = "error",
+}
+
 export interface Word {
   key: number;
   jap: string;

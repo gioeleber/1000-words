@@ -19,7 +19,6 @@ export default function DayList() {
     useState<boolean>(false);
 
   useEffect(() => {
-    toggleCompleatedAdvice(!!level.lastCompletion);
     const now = formatDate(new Date());
     if (level.lastCompletion === undefined) {
       setLevel({ lastCompletion: null, day: 1 });
@@ -31,6 +30,7 @@ export default function DayList() {
       return;
     }
     setDay(level.day);
+    toggleCompleatedAdvice(!!level.lastCompletion);
   }, []);
 
   return (
