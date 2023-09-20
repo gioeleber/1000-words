@@ -1,4 +1,5 @@
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
+import EmailProvider from "next-auth/providers/email";
 import { type GetServerSidePropsContext } from "next";
 import {
   getServerSession,
@@ -79,10 +80,3 @@ export const getServerAuthSession = (ctx: {
 }) => {
   return getServerSession(ctx.req, ctx.res, authOptions);
 };
-function EmailProvider(arg0: {
-  server: { host: any; port: number; auth: { user: any; pass: any } };
-  from: any;
-  sendVerificationRequest: any;
-}): import("next-auth/providers").Provider {
-  throw new Error("Function not implemented.");
-}
