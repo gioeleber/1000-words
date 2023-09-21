@@ -59,7 +59,7 @@ function html(params: { url: string; host: string }) {
       <td align="center" style="padding: 20px 0;">
         <table border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td align="center" style="border-radius: ${theme?.borderRadius?.lg}" bgcolor="${color.buttonBackground}"><a href="${url}/day-list"
+            <td align="center" style="border-radius: ${theme?.borderRadius?.lg}" bgcolor="${color.buttonBackground}"><a href="${url}"
                 target="_blank"
                 style="font-size: 18px; font-family: ${fontFamily}; color: ${color.buttonText}; text-decoration: none; border-radius: ${theme?.borderRadius?.lg}; padding: ${theme?.padding?.["2"]} ${theme?.padding?.["4"]}; border: 1px solid ${color.buttonBorder}; display: inline-block;">Sign
                 in</a></td>

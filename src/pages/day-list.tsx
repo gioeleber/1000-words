@@ -3,14 +3,19 @@ import React, { useEffect, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 import Heading from "~/components/Heading";
-import NextLink from "~/components/NextLink";
-import { LEVEL_KEY } from "~/utils/consts";
+import { GAME_KEY, LEVEL_KEY, gameInitValue } from "~/utils/consts";
 import { formatDate } from "~/utils/dateUtils";
 import DAYS from "~/data/days.json";
-import { type Level } from "~/types/global";
+import { GameFase, type Game, type Level } from "~/types/global";
+import Button from "~/components/Button";
+import { useRouter } from "next/router";
+import { ButtonStyle } from "~/types/components";
 
 export default function DayList() {
+  const router = useRouter();
+
   const [day, setDay] = useState<number>(1);
+  const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
   const [level, setLevel] = useLocalStorage<Level>(LEVEL_KEY, {
     lastCompletion: undefined,
     day: 1,
@@ -33,6 +38,13 @@ export default function DayList() {
     toggleCompleatedAdvice(!!level.lastCompletion);
   }, []);
 
+  const handleGoToDay = (dataDay: number) => {
+    if (game.day !== dataDay) {
+      setGame({ ...gameInitValue, day: dataDay, fase: GameFase.PREPARATION });
+    }
+    void router.push("/app/" + dataDay);
+  };
+
   return (
     <>
       <Head>
@@ -48,7 +60,12 @@ export default function DayList() {
         {DAYS.map(({ day: dataDay }) =>
           dataDay <= day ? (
             <li key={dataDay}>
-              <NextLink href={"/app/" + dataDay}>Day {dataDay}</NextLink>
+              <Button
+                buttonStyle={ButtonStyle.LINK}
+                onClick={() => handleGoToDay(dataDay)}
+              >
+                Day {dataDay}
+              </Button>
             </li>
           ) : (
             <li key={dataDay}>Day {dataDay}</li>

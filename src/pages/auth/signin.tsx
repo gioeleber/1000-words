@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { type FormEvent, useState, useRef } from "react";
 import {
   type GetServerSideProps,
   type InferGetServerSidePropsType,
 } from "next";
 import { useRouter } from "next/router";
-import { getCsrfToken } from "next-auth/react";
+import { getCsrfToken, signIn } from "next-auth/react";
 import Head from "next/head";
 
 import Button from "~/components/Button";
@@ -18,6 +18,17 @@ export default function SignIn({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const router = useRouter();
   const [status, setStatus] = useState(ReqStatus.IDLE);
+  const emailRef = useRef<HTMLInputElement>(null);
+
+  const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setStatus(ReqStatus.LOADING);
+
+    void signIn("email", {
+      email: emailRef.current?.value,
+      callbackUrl: "/day-list",
+    });
+  };
 
   return (
     <>
@@ -26,14 +37,10 @@ export default function SignIn({
         <meta name="description" content="Sign In Page" />
       </Head>
       <Heading priority={1}>Sign in</Heading>
-      <form
-        className="w-80"
-        method="post"
-        action="/api/auth/signin/email"
-        onSubmit={() => setStatus(ReqStatus.LOADING)}
-      >
+      <form className="w-80" method="post" onSubmit={handleSubmit}>
         <input name="csrfToken" type="hidden" defaultValue={csrfToken} />
         <Input
+          ref={emailRef}
           className="mb-4"
           label="Email address"
           type="email"
@@ -41,7 +48,7 @@ export default function SignIn({
           name="email"
           placeholder="Es. example@email.com"
           status={router.query?.error ? "error" : undefined}
-          error={"You must enter a registered email or a valid email"}
+          error="You must enter a registered email or a valid email"
         />
         <Button
           type="submit"

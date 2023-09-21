@@ -15,7 +15,7 @@ export default function AuthButton(): JSX.Element {
 
   return session?.user ? (
     <NextLink
-      href="/users/user"
+      href="/user"
       linkStyle={ButtonStyle.NULL}
       aria-label="user-profile"
       className="flex flex-col items-center text-zinc-700"
@@ -26,10 +26,10 @@ export default function AuthButton(): JSX.Element {
   ) : (
     <Button
       onClick={() => {
-        session ? void signOut() : void router.push("/api/auth/signin");
+        void router.push("/api/auth/signin");
       }}
     >
-      {session ? "Sign out" : "Sign in"}
+      Sign in
     </Button>
   );
 }
@@ -46,7 +46,9 @@ export const SignOutButton = ({ confirm, className }: SignOutProps) => {
 
   const handleSignOut = () => {
     setStatus(ReqStatus.LOADING);
-    confirm ? void signOut() : void router.push("/api/auth/signout");
+    confirm
+      ? void signOut({ callbackUrl: "/" })
+      : void router.push("/api/auth/signout");
   };
 
   return (

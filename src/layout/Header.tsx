@@ -11,7 +11,6 @@ export default function Header() {
   const router = useRouter();
 
   const isHome = router.pathname === "/";
-  console.log(router.pathname);
 
   return (
     <header className="fixed left-0 top-0 w-full border-b border-gray-100 bg-white">
