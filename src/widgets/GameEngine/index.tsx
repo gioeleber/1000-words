@@ -33,11 +33,11 @@ export default function GameEngine({ day }: Props) {
   if (!today) return <p>loading...</p>;
 
   switch (true) {
-    case game.fase === GameFase.PREPARATION:
-      return <Preparation words={today.words} day={day} />;
+    case game.fase === GameFase.SCORE:
+      return <Score words={today.words} day={day} />;
     case game.fase === GameFase.QUIZ:
       return <Quiz words={today.words} day={day} />;
     default:
-      return <Score words={today.words} day={day} />;
+      return <Preparation words={today.words} day={day} />;
   }
 }
