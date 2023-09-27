@@ -10,4 +10,6 @@ export const gameInitValue: Game = {
   fase: GameFase.PREPARATION,
   words: [],
   answers: [],
+  lastCompletion: undefined,
+  level: 1,
 };

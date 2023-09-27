@@ -31,9 +31,6 @@ export interface Game {
   fase: GameFase;
   words: Word[];
   answers: { key: number; answer: boolean }[];
-}
-
-export interface Level {
   lastCompletion?: string | null;
-  day: number;
+  level: number;
 }
