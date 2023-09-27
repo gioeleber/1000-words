@@ -19,6 +19,12 @@ export enum GameFase {
 
 export type Games = Record<string, Game>;
 
+export interface Day {
+  key: number;
+  jap: string;
+  eng: string[];
+}
+
 export interface Game {
   day?: number;
   session: number;

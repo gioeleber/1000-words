@@ -93,14 +93,91 @@
   {
     "day": 7,
     "words": [
-      {"key": 2,"jap": "出る (deru)","eng" : ["go out", "leave"]}
-      
+      {"key": 61,"jap": "住む (sumu)", "eng" : ["live", "reside"]},
+      {"key": 62,"jap": "働く (hataraku)", "eng" : ["work"]},
+      {"key": 63,"jap": "難しい (muzukashii)", "eng" : ["difficult"]},
+      {"key": 64,"jap": "先生 (sensei)", "eng" : ["teacher"]},
+      {"key": 65,"jap": "立つ (tatsu)", "eng" : ["stand", "rise"]},
+      {"key": 66,"jap": "呼ぶ (yobu)", "eng" : ["call", "name"]},
+      {"key": 67,"jap": "大学 (daigaku)", "eng" : ["university", "college"]},
+      {"key": 68,"jap": "安い (yasui)", "eng" : ["cheap", "inexpensive"]},
+      {"key": 69,"jap": "もっと (motto)", "eng" : ["more"]},
+      {"key": 70,"jap": "帰る (kaeru)", "eng" : ["go back home"]}
+    ]
+  },
+  {
+    "day": 8,
+    "words": [
+      {"key": 71,"jap": "分かる (wakaru)", "eng" : ["understand"]},
+      {"key": 72,"jap": "広い (hiroi)", "eng" : ["wide", "big"]},
+      {"key": 73,"jap": "数 (suu)", "eng" : ["number"]},
+      {"key": 74,"jap": "近い (chikai)", "eng" : ["near", "close"]},
+      {"key": 75,"jap": "そこ (soko)", "eng" : ["there"]},
+      {"key": 76,"jap": "走る (hashiru)", "eng" : ["run"]},
+      {"key": 77,"jap": "入れる (ireru)", "eng" : ["put in"]},
+      {"key": 78,"jap": "教える (oshieru)", "eng" : ["teach", "tell"]},
+      {"key": 79,"jap": "歩く (aruku)", "eng" : ["walk", "go on foot"]},
+      {"key": 80,"jap": "会う (au)", "eng" : ["meet"]}
+    ]
+  },
+  {
+    "day": 9,
+    "words": [
+      {"key": 81,"jap": "書く (kaku)", "eng" : ["write"]},
+      {"key": 82,"jap": "頭 (atama)", "eng" : ["head"]},
+      {"key": 83,"jap": "売る (uru)", "eng" : ["sell"]},
+      {"key": 84,"jap": "大好き (daisuki)", "eng" : ["like a lot","like (something) a lot"]},
+      {"key": 85,"jap": "体 (karada)", "eng" : ["body", "physique"]},
+      {"key": 86,"jap": "直ぐ (sugu)", "eng" : ["at once", "soon"]},
+      {"key": 87,"jap": "飛ぶ (tobu)", "eng" : ["fly"]},
+      {"key": 88,"jap": "とても (totemo)", "eng" : ["very", "in my opinion"]},
+      {"key": 89,"jap": "誰 (dare)", "eng" : ["who"]},
+      {"key": 90,"jap": "好き (suki)", "eng" : ["favorite", "liked"]}
+    ]
+  },
+  {
+    "day": 10,
+    "words": [
+      {"key": 91,"jap": "読む (yomu)", "eng" : ["read"]},
+      {"key": 92,"jap": "次 (tsugi)", "eng" : ["next"]},
+      {"key": 93,"jap": "あなた (anata)", "eng" : ["you"]},
+      {"key": 94,"jap": "飲む (nomu)", "eng" : ["drink"]},
+      {"key": 95,"jap": "古い (furui)", "eng" : ["old"]},
+      {"key": 96,"jap": "質問 (shitsumon)", "eng" : ["question"]},
+      {"key": 97,"jap": "今日 (kyou)", "eng" : ["today"]},
+      {"key": 98,"jap": "友達 (tomodachi)", "eng" : ["friend", "companion"]},
+      {"key": 99,"jap": "早い (hayai)", "eng" : ["early"]},
+      {"key": 100,"jap": "どれ (dore)", "eng" : ["what", "which"]}
+    ]
+  },
+  {
+    "day": 11,
+    "words": [
+      {"key": 101,"jap": "美しい (utsukushii)", "eng" : ["beautiful"]},
+      {"key": 102,"jap": "いつも (itsumo)", "eng" : ["always"]},
+      {"key": 103,"jap": "足 (ashi)", "eng" : ["leg", "foot"]},
+      {"key": 104,"jap": "起こす (okosu)", "eng" : ["wake up"]},
+      {"key": 105,"jap": "見せる (miseru)", "eng" : ["show"]},
+      {"key": 106,"jap": "娘 (musume)", "eng" : ["daughter", "girl"]},
+      {"key": 107,"jap": "楽しむ (tanoshimu)", "eng" : ["enjoy"]},
+      {"key": 108,"jap": "色 (iro)", "eng" : ["color"]},
+      {"key": 109,"jap": "みんな (minna)", "eng" : ["everybody" ]},
+      {"key": 110,"jap": "取る (toru)", "eng" : ["take", "get"]}
+    ]
+  },
+  {
+    "day": 12,
+    "words": [
+      {"key": 111,"jap": "勉強 (benkyou)", "eng" : ["study"]},
+      {"key": 112,"jap": "できる (dekiru)", "eng" : ["being able", "be good at"]},
+      {"key": 113,"jap": "短い (mijikai)", "eng" : ["short", "brief"]},
+      {"key": 114,"jap": "落ちる (ochiru)", "eng" : ["fall", "come down"]},
+      {"key": 115,"jap": "息子 (musuko)", "eng" : ["son"]},
+      {"key": 116,"jap": "白い (shiroi)", "eng" : ["white", "blank"]},
+      {"key": 117,"jap": "飛行機 (hikouki)", "eng" : ["airplane"]},
+      {"key": 118,"jap": "病気 (byouki)", "eng" : ["illness"]},
+      {"key": 119,"jap": "冬 (fuyu)", "eng" : ["winter"]},
+      {"key": 120,"jap": "年 (toshi)", "eng" : ["year", "age"]}
     ]
   }
 ]
-
-
-
-
-
-

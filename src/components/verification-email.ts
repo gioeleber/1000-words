@@ -1,7 +1,8 @@
 import { type SendVerificationRequestParams } from "next-auth/providers/email";
 import { createTransport } from "nodemailer";
 import resolveConfig from "tailwindcss/resolveConfig";
-import config from "../../tailwind.config";
+import config from "../../tailwind.config.cjs";
+import type SMTPTransport from "nodemailer/lib/smtp-transport";
 
 export async function sendVerificationRequest(
   params: SendVerificationRequestParams,
@@ -9,7 +10,7 @@ export async function sendVerificationRequest(
   const { identifier, url, provider } = params;
   const { host } = new URL(url);
   // NOTE: You are not required to use `nodemailer`, use whatever you want.
-  const transport = createTransport(provider.server);
+  const transport = createTransport(provider.server as SMTPTransport);
   const result = await transport.sendMail({
     to: identifier,
     from: provider.from,
@@ -30,9 +31,9 @@ function html(params: { url: string; host: string }) {
 
   const escapedHost = host.replace(/\./g, "&#8203;.");
 
-  const white = theme?.colors?.white;
-  const brandColor = theme?.colors?.primary;
-  const textColor = theme?.colors?.["gray.700"];
+  const white = theme?.colors?.white as string;
+  const brandColor = theme?.colors?.primary as string;
+  const textColor = theme?.colors?.["gray.700"] as string;
 
   const color = {
     background: white,

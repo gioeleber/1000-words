@@ -2,8 +2,8 @@ import { type ButtonHTMLAttributes, type ReactNode } from "react";
 import { twMerge } from "tailwind-merge";
 
 import LoaderIcon from "/public/icons/puff-loader.svg";
-import { buttonStyleClasses } from "../utils/styleUtils";
-import { type ButtonStyle } from "../types/components";
+import { buttonStyleClasses } from "~/utils/styleUtils";
+import { type ButtonStyle } from "~/types/components";
 
 interface Props extends ButtonHTMLAttributes<HTMLButtonElement> {
   children: ReactNode;

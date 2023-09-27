@@ -4,10 +4,6 @@
  */
 await import("./src/env.mjs");
 
-function defineNextConfig(config) {
-  return config;
-}
-
 /** @type {import("next").NextConfig} */
 const config = {
   reactStrictMode: true,
@@ -21,22 +17,19 @@ const config = {
     locales: ["en"],
     defaultLocale: "en",
   },
+
+  /**
+   * @param {{ module: { rules: { test: RegExp; issuer: RegExp; use: string[]; }[]; }; }} config
+   */
   webpack(config) {
     config.module.rules.push({
-      test: /\.svg$/,
+      test: /\.svg$/i,
+      issuer: /\.[jt]sx?$/,
       use: ["@svgr/webpack"],
     });
-
-    config.resolve.fallback = {
-      fs: false,
-      net: false,
-      dns: false,
-      child_process: false,
-      tls: false,
-    };
 
     return config;
   },
 };
 
-export default defineNextConfig(config);
+export default config;

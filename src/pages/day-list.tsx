@@ -1,5 +1,5 @@
 import Head from "next/head";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { useLocalStorage } from "usehooks-ts";
 
 import Heading from "~/components/Heading";
@@ -10,11 +10,14 @@ import { GameFase, type Game, type Level } from "~/types/global";
 import Button from "~/components/Button";
 import { useRouter } from "next/router";
 import { ButtonStyle } from "~/types/components";
+import clsx from "clsx";
 
 export default function DayList() {
   const router = useRouter();
 
-  const [day, setDay] = useState<number>(1);
+  const [isClient, setIsClient] = useState(false);
+  const [day, setDay] = useState(1);
+  const [week, setWeek] = useState(0);
   const [game, setGame] = useLocalStorage<Game>(GAME_KEY, gameInitValue);
   const [level, setLevel] = useLocalStorage<Level>(LEVEL_KEY, {
     lastCompletion: undefined,
@@ -22,6 +25,10 @@ export default function DayList() {
   });
   const [showCompleatedAdvice, toggleCompleatedAdvice] =
     useState<boolean>(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const now = formatDate(new Date());
@@ -45,6 +52,12 @@ export default function DayList() {
     void router.push("/app/" + dataDay);
   };
 
+  const days = useMemo(() => {
+    return DAYS.slice(week * 7, week * 7 + 7);
+  }, [week]);
+
+  if (!isClient) return null;
+
   return (
     <>
       <Head>
@@ -56,8 +69,9 @@ export default function DayList() {
         <p>You are set for today. Come back tomorrow to unlock a new level!</p>
       )}
       <Heading priority={1}>You are at level {day}</Heading>
+      <Heading priority={3}>Week {week + 1}</Heading>
       <ul>
-        {DAYS.map(({ day: dataDay }) =>
+        {days.map(({ day: dataDay }) =>
           dataDay <= day ? (
             <li key={dataDay}>
               <Button
@@ -71,6 +85,22 @@ export default function DayList() {
             <li key={dataDay}>Day {dataDay}</li>
           ),
         )}
+      </ul>
+      <ul className="flex gap-x-2">
+        {Array(Math.ceil(DAYS.length / 7))
+          .fill(null)
+          .map((_, i) => (
+            <li key={i.toString()}>
+              <button
+                onClick={() => setWeek(i)}
+                className={clsx(
+                  "h-2 w-2 rounded-full",
+                  week === i ? "bg-neutral-600" : "bg-neutral-300",
+                )}
+                aria-label={"page " + i.toString()}
+              ></button>
+            </li>
+          ))}
       </ul>
     </>
   );
